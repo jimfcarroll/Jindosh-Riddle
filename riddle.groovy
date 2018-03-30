@@ -7,59 +7,59 @@ String[] riddlePlaces = new String[5];
 String[] riddleDrinks = new String[5];
 
 // who wore the hat, and what jaundy color was it
-riddlePeople[PERSON.contee.ordinal()] = "Winslow";
-riddleColors[COLOR.blue.ordinal()] = "purple";
+riddlePeople[PERSON.contee.ordinal()] = "Natsiou";
+riddleColors[COLOR.blue.ordinal()] = "green";
 
 // Who was at the left and what color was the person next to the wearing
-riddlePeople[PERSON.marcolla.ordinal()] = "Marcolla";
-riddleColors[COLOR.purple.ordinal()] = "blue";
+riddlePeople[PERSON.marcolla.ordinal()] = "Winslow";
+riddleColors[COLOR.purple.ordinal()] = "purple";
 
 // What color was the person who sat left of another person wearing what other color. 
 riddleColors[COLOR.red.ordinal()] = "red";
-riddleColors[COLOR.white.ordinal()] = "green";
+riddleColors[COLOR.white.ordinal()] = "white";
 
 // And what was that first person drinking that they spilled
-riddleDrinks[DRINK.wine.ordinal()] = "whiskey";
+riddleDrinks[DRINK.wine.ordinal()] = "absinthe";
 
 // Where was the traveler from and what color were they wearing
-riddlePlaces[HOME.Dunwall.ordinal()] = "Dabokva";
-riddleColors[COLOR.green.ordinal()] = "white";
+riddlePlaces[HOME.Dunwall.ordinal()] = "Fraeport";
+riddleColors[COLOR.green.ordinal()] = "blue";
 
 // What item was bragged about
-riddleItems[HL.tin.ordinal()] = "Snuff Tin";
+riddleItems[HL.tin.ordinal()] = "War Medal";
 
 // Who showed off their heirloom and what was it
-riddlePeople[PERSON.winslow.ordinal()] = "Countess Contee";
-riddleItems[HL.diamond.ordinal()] = "War Medal";
+riddlePeople[PERSON.winslow.ordinal()] = "Contee";
+riddleItems[HL.diamond.ordinal()] = "Bird Pendant";
 
 // Where was the person from who scoffed and what was it no match for
-riddlePlaces[HOME.Fraeport.ordinal()] = "Fraeport";
-riddleItems[HL.medal.ordinal()] = "Ring";
+riddlePlaces[HOME.Fraeport.ordinal()] = "Dunwall";
+riddleItems[HL.medal.ordinal()] = "Snuff Tin";
 
 // What else was carried where the person next to them (where were they from)  almost spliied their neigbor's drink (what drink)
-riddleItems[HL.ring.ordinal()] = "Bird Pendant";
-riddlePlaces[HOME.Dab.ordinal()] = "Dunwall";
-riddleDrinks[DRINK.beer.ordinal()] = "absinth";
+riddleItems[HL.ring.ordinal()] = "Diamond";
+riddlePlaces[HOME.Dab.ordinal()] = "Karnaca";
+riddleDrinks[DRINK.beer.ordinal()] = "wine";
 
 // who raised what drink in toast
-riddlePeople[PERSON.nat.ordinal()] = "Finch";
-riddleDrinks[DRINK.whiskey.ordinal()] = "rum";
+riddlePeople[PERSON.nat.ordinal()] = "Marcolla";
+riddleDrinks[DRINK.whiskey.ordinal()] = "whiskey";
 
 // where was the woman from that jumped up on the table
-riddlePlaces[HOME.Baelton.ordinal()] = "Karnaca";
+riddlePlaces[HOME.Baelton.ordinal()] = "Dabokva";
 
 // and what was she drinking
-riddleDrinks[DRINK.absinth.ordinal()] = "wine";
+riddleDrinks[DRINK.absinth.ordinal()] = "rum";
 
 // what was the person in the center drinking
 riddleDrinks[DRINK.rum.ordinal()] = "beer";
 
 // who captivated them with a story of what place
-riddlePeople[PERSON.fitch.ordinal()] = "Natisou";
+riddlePeople[PERSON.fitch.ordinal()] = "Finch";
 riddlePlaces[HOME.Karnaka.ordinal()] = "Baelton";
 
 // What item is listed that wasn't metioned
-riddleItems[HL.pendant.ordinal()] = "Diamond";
+riddleItems[HL.pendant.ordinal()] = "Ring";
 
 printEntries = {
     Entry[] entries ->
@@ -246,17 +246,23 @@ def conteeblue = { Entry[] cur ->
                            return ret.size == 1
                            };
 def redleftofwhite = { Entry[] cur ->
-                       boolean seenred = false;
-                       for (Entry e : cur) {
-                           if (e.color == COLOR.white){
-                               if (!seenred)
-                                   return false;
-                               else
-                                   return true;
-                           }
+                       for (int i = 0; i < 4; i++){
+                           Entry e = cur[i];
                            if (e.color == COLOR.red)
-                               seenred = true
+                               return cur[i+1].color == COLOR.white
                        }
+                       return false;
+                       //boolean seenred = false;
+                       //for (Entry e : cur) {
+                       //    if (e.color == COLOR.white){
+                       //        if (!seenred)
+                       //            return false;
+                       //        else
+                       //            return true;
+                       //    }
+                       //    if (e.color == COLOR.red)
+                       //        seenred = true
+                       //}
 };
 
 def redwithwine = { Entry[] cur ->
